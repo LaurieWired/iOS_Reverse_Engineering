@@ -1,6 +1,24 @@
-# iOS_Reverse_Engingeering
+# iOS Reverse Engingeering Reference
 
-## Common Entrypoints for Swift and Objective C
+## Info.plist
+A plist (property list) file is a structured data representation used by macOS and iOS. It is often for storing user settings and information about bundles and applications and can be in XML or binary format. Reading an XML plist is as simple as throwing the file in a text editor, but reading a binary plist requires decoding to convert to a human-readable format.
+
+### Reading a Binary Property List
+Opening a plist file on Mac is as simple as double-clicking the file. By default, Mac will decode the file to a human-readable format. If not working on Mac, however, the following Python code decodes the binary plist and prints it as a JSON string to the console:
+
+```
+import plistlib
+import json
+
+with open('Info.plist', 'rb') as fp:
+    pl = plistlib.load(fp)
+
+print(json.dumps(pl, indent=4))
+```
+
+
+## Common Entrypoints for Swift and Objective C Code
+
 The following contains a table of common methods to look at when starting to Reverse Engineer and iOS application. These are different entrypoints of code that may be executed for different states of the application.
 
 | Class              | Method (Objective-C / Swift)  | Description |
