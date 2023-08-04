@@ -16,6 +16,15 @@ with open('Info.plist', 'rb') as fp:
 print(json.dumps(pl, indent=4))
 ```
 
+### Finding the Executable in the Info.plist
+Once, you have opened the plist text, the main executable will be found under the "CFBundleExecutable" tag.
+
+![ios_plist_exe](https://github.com/LaurieWired/iOS_Reverse_Engingeering/assets/123765654/174576ba-f371-45c3-965e-68cb045c4554)
+
+This string will name a Macho-O binary inside of the application bundle that will be the main entrypoint of the application.
+
+![macho_exe](https://github.com/LaurieWired/iOS_Reverse_Engingeering/assets/123765654/3033cc64-f318-4756-afe6-0aafe8268f02)
+
 
 ## Common Entrypoints for Swift and Objective C Code
 
