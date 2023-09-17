@@ -35,6 +35,9 @@ lproj directories contain localized strings
 Supports different languages per lproj directory. For example, if you're searching for the strings in English, maneuver to the ```en.lproj``` directory and open the ```Localizable.strings``` file. This file is encoded, but corresponds to key-value pairs.
 
 ### Decoding Via plutil
+```
+plutil -p Payload/MyApp.app/en.lproj/Localizable.strings
+```
 
 ### Decoding Via Python
 
@@ -59,6 +62,8 @@ To determine if a binary is written in Swift, check the Mach-O sections and see 
 
 ### Dynamic Method Resolution
 Selectors
+
+Objective-C runtime reference: https://developer.apple.com/documentation/objectivec
 
 ### Name Mangling
 Fixing swift mangled names
