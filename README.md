@@ -29,6 +29,12 @@ This string will name a Mach-O binary inside of the application bundle that will
 
 ![macho_exe](https://github.com/LaurieWired/iOS_Reverse_Engingeering/assets/123765654/3033cc64-f318-4756-afe6-0aafe8268f02)
 
+## Entitlements
+
+Payload/MyApp.app/embedded.mobileprovision
+
+The entitlements can be found under the <key>Entitlements</key> section.
+
 ## Finding Strings
 lproj directories contain localized strings
 
