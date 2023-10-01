@@ -1,6 +1,6 @@
-# iOS Reverse Engingeering Reference
+# Getting Started with iOS Reverse Engingeering
 
-# Static Analysis
+# Static Analysis of an IPA
 
 ## Application Entrypoint
 Find the entrypoint in the Info.plist
@@ -34,6 +34,8 @@ This string will name a Mach-O binary inside of the application bundle that will
 Payload/MyApp.app/embedded.mobileprovision
 
 The entitlements can be found under the <key>Entitlements</key> section.
+
+Generally for system capabilities. App capabilities will be in the Info.plist
 
 ## Finding Strings
 lproj directories contain localized strings
