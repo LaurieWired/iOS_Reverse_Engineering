@@ -1,9 +1,6 @@
 #Demangles Swift class, function, and variable names
 #@author LaurieWired
 #@category Swift
-#@keybinding 
-#@menupath Tools.Swift.Demangle Swift Names
-#@toolbar 
 
 # NOTES:
 # Requires Swift to be installed on the machine
@@ -63,7 +60,7 @@ def beautify_swift_program():
             func.setName(cleaned_name, ghidra.program.model.symbol.SourceType.USER_DEFINED)
 
     # Demangle labels if they are Swift types
-    print("\nRenaming labels")
+    print("\nRenaming labels. May take some time...")
     for symbol in currentProgram.getSymbolTable().getAllSymbols(True):
         if symbol.getSymbolType() == SymbolType.LABEL:
             demangled_name = demangle_swift_name(symbol.getName())
