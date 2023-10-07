@@ -11,14 +11,17 @@
 
 from ghidra.program.model.listing import Function
 from ghidra.program.model.symbol import SymbolType
+from java.lang import System
 import subprocess
-import platform
 
 def demangle_swift_name(mangled_name):
+    os_name = System.getProperty("os.name").lower()
 
     # Determine the correct command based on the OS
-    if platform.system() == "Darwin":
+    if "mac" in os_name:
         cmd = 'xcrun swift-demangle --simplified --compact'
+        mangled_name = "'{}'".format(mangled_name)  # Surround with single quotes
+
     else:
         cmd = 'swift-demangle --simplified --compact'
 
@@ -28,7 +31,7 @@ def demangle_swift_name(mangled_name):
     proc.stdin.close()
     demangled = proc.stdout.read().strip()
     proc.wait()
-    
+   
     # Return demangler output. If it's not a Swift type, it will just return original name
     return demangled
 
@@ -36,7 +39,7 @@ def clean_demangled_name(name):
 
     # Remove everything after the opening parenthesis (removes function arguments)
     name = name.split("(")[0]
-    
+   
     # Replace spaces and other undesired characters
     name = name.replace(" ", "_")
     name = name.replace("<", "_")
@@ -51,10 +54,10 @@ def beautify_swift_program():
     for func in currentProgram.getFunctionManager().getFunctions(True):
         demangled_name = demangle_swift_name(func.getName())
         cleaned_name = clean_demangled_name(demangled_name)
-        
+       
         if cleaned_name != func.getName():
             print("Original: {}, New: {}".format(func.getName(), cleaned_name))
-            
+           
             # Set new function name and comment
             func.setComment("Original: {}\nDemangled: {}".format(func.getName(), demangled_name))
             func.setName(cleaned_name, ghidra.program.model.symbol.SourceType.USER_DEFINED)
@@ -65,10 +68,10 @@ def beautify_swift_program():
         if symbol.getSymbolType() == SymbolType.LABEL:
             demangled_name = demangle_swift_name(symbol.getName())
             cleaned_name = clean_demangled_name(demangled_name)
-            
+           
             if cleaned_name != symbol.getName():
                 print("Original: {}, New: {}".format(symbol.getName(), cleaned_name))
-                
+               
                 # Set new label name and comment
                 # Ghidra already also renames pointers to labels as well
                 currentProgram.getListing().setComment(symbol.getAddress(), ghidra.program.model.listing.CodeUnit.EOL_COMMENT, "Original: {}\nDemangled: {}".format(symbol.getName(), demangled_name))

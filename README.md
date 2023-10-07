@@ -1,3 +1,6 @@
+# Running Scripts
+Install Swift
+
 # Getting Started with iOS Reverse Engingeering
 
 # Static Analysis of an IPA
@@ -78,6 +81,7 @@ Fixing swift mangled names
 
 Class names and method names are mangled into one identifer.
 https://ronyfadel.github.io/swiftdemangler/
+
 
 ### Locating Libraries
 Dylibs and frameworks
