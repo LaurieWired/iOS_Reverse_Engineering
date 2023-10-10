@@ -1,9 +1,62 @@
-# Running Scripts
-Install Swift
+# Repository Overview
+This repository is a reference for getting started with iOS Reverse Engineering! It contains all the information you need to start taking apart IPA files including:
+- Scripts for helping your iOS Reverse Engineering in Ghidra
+- Example iOS IPA files demonstrating different forms of obfuscation
+- A guide for getting started with iOS Reverse Engineering
 
-# Getting Started with iOS Reverse Engingeering
+I will continue adding more information to speed up your Reverse Engineering process!
 
-# Static Analysis of an IPA
+# Example IPA Files
+Each IPA file is created to help you with your static analysis. Use the section below to learn how to extract the executable components and learn their inner workings.
+
+- [Swizzling IPA](https://github.com/LaurieWired/iOS_Reverse_Engingeering/blob/main/ObfuscatedAppExamples/ObjectiveSwizzling.ipa) - This file contains an example iOS application written in Objective-C that demostrates swizzling to replace one method's implementation with another.
+- [No Tampering IPA](https://github.com/LaurieWired/iOS_Reverse_Engingeering/blob/main/ObfuscatedAppExamples/NoTampering.ipa) - This file contains an example iOS application written in Swift that uses the [IOSSecuritySuite](https://github.com/securing/IOSSecuritySuite) to avoid printing the true value to the screen if it discovers any potential tampering, debugging, or emulator use.
+- [Control Flow Flattening IPA](https://github.com/LaurieWired/iOS_Reverse_Engingeering/blob/main/ObfuscatedAppExamples/ControlFlowFlattening.ipa) - This file contains an example iOS application written in Swift that implements the same method without control flow flattening, with flattening, and with a more complex flattening example.
+
+# Ghidra Scripts
+This repo contains scripts for helping your iOS Reverse Engineering including:
+- [Swift Name Demangler](https://github.com/LaurieWired/iOS_Reverse_Engingeering/blob/main/SwiftNameDemangler.py) - This traverses your Swift binary and demangles methods and labels. It sets each of the new names and leaves a comment with the original and demangled name above the method and label.
+- [Swizzling Detector](https://github.com/LaurieWired/iOS_Reverse_Engingeering/blob/main/SwizzlingDetector.py) - This script searches your Objective-C binary to detect references to potential Swizzling calls. It prints the function name and all potential references in the code.
+
+## Running the Scripts
+In order to run the scripts in this repo, you can add them as new scripts for Ghidra. Either manually place them in the `ghidra_scripts` folder or add them through the Ghidra GUI. Here are the steps for both options:
+
+### Option 1: Pasting the Script into `ghidra_scripts` Folder
+
+1. **Locate the `ghidra_scripts` Folder**:
+   - By default, Ghidra has a directory named `ghidra_scripts` in your user's home directory or within the Ghidra installation directory.
+   
+2. **Add the Scripts**:
+   - Copy or paste the scripts into the `ghidra_scripts` folder.
+
+3. **Refresh the Script Manager in Ghidra**:
+   - If Ghidra is already open, refresh the Script Manager (`Window` -> `Script Manager`).
+   - Click the "Refresh Script List" icon.
+
+4. **Run the Script**:
+   - The scripts should now appear in the Script Manager.
+   - Highlight the script and click the green "Run" button. Make sure you have the appropriate binary opened in Ghidra.
+
+### Option 2: Using the Ghidra GUI
+
+1. **Open the Script Manager**:
+   - Navigate to `Window` -> `Script Manager` in Ghidra.
+
+2. **Determine Script Directory**:
+   - In the Script Manager, there's an icon with three dots. Click it to see the script directories.
+
+3. **Use the "New Script" Option**:
+   - In the Script Manager, click on the "New Script" icon.
+   - This will open a dialog where you can write or paste your script and save it.
+
+4. **Run the Script**:
+   - After saving, the script will appear in the Script Manager.
+   - Highlight the script and click the green "Run" button. Make sure you have the appropriate program or binary opened in Ghidra.
+
+
+## Installing Swift
+
+# Getting Started Reversing iOS IPA Files
 
 ## Application Entrypoint
 Find the entrypoint in the Info.plist
@@ -31,6 +84,8 @@ Once, you have opened the plist text, the main executable will be found under th
 This string will name a Mach-O binary inside of the application bundle that will be the main entrypoint of the application.
 
 ![macho_exe](https://github.com/LaurieWired/iOS_Reverse_Engingeering/assets/123765654/3033cc64-f318-4756-afe6-0aafe8268f02)
+
+Find an acompanying video to help you take apart an IPA file at [YouTube - Finding the Entrypoint of iOS Apps in Ghidra](https://www.youtube.com/watch?v=mLDsIMXafP4)
 
 ## Entitlements
 
@@ -79,6 +134,10 @@ Objective-C runtime reference: https://developer.apple.com/documentation/objecti
 ### Name Mangling
 Fixing swift mangled names
 
+```
+swift-demangle
+```
+
 Class names and method names are mangled into one identifer.
 https://ronyfadel.github.io/swiftdemangler/
 
@@ -101,6 +160,4 @@ The following contains a table of common methods to look at when starting to Rev
 | `UIViewController` | `viewDidLoad` / `viewDidLoad()` | Called after the controller's view is loaded into memory. Ideal for initial setup. |
 | `UIViewController` | `viewWillAppear:` / `viewWillAppear(_:)` | Called before the view is added to the app's view hierarchy. |
 
-# Dynamic Analysis
 
-Link to Frida scripts
