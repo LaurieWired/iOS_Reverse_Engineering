@@ -1,9 +1,8 @@
----
-
-
 <div align="center">
 
 ![logo](images/logo.jpg)
+
+---
 
 [![License: Apache 2.0](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/LaurieWired/iOS_Reverse_Engineering)](https://github.com/LaurieWired/iOS_Reverse_Engineering/releases)
@@ -15,6 +14,7 @@
 </div>
 
 ---
+
 
 # Description
 This repository is a reference for getting started with iOS Reverse Engineering! It contains all the information you need to start taking apart IPA files including:
