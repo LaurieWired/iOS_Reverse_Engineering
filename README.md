@@ -19,8 +19,8 @@ Dive deep into the heart of iOS with this comprehensive guide to reverse enginee
 
 📚 **Explore the wiki!**: The [**Comprehensive iOS RE Wiki**](https://github.com/LaurieWired/iOS_Reverse_Engineering/wiki/iOS-RE-Reference) contains guides and information for kickstarting your iOS reverse engineering!
 
-📱 [Example IPA Files](https://github.com/LaurieWired/iOS_Reverse_Engineering/tree/main#example-ipa-files): Example iOS IPA files showcase various obfuscation techniques.
+📱 [Example IPA Files](https://github.com/LaurieWired/iOS_Reverse_Engineering/tree/main/ObfuscatedAppExamples): Example iOS IPA files showcase various obfuscation techniques.
 
-🛠️ [Ghidra Scripts](https://github.com/LaurieWired/iOS_Reverse_Engineering/tree/main#ghidra-scripts): Speed up your iOS RE journey with custom Ghidra scripts.
+🛠️ [Ghidra Scripts](https://github.com/LaurieWired/iOS_Reverse_Engineering/blob/main/SwiftNameDemangler.py): Speed up your iOS RE journey with custom Ghidra scripts.
 
 Join the community and help evolve the landscape of iOS Reverse Engineering. I will continue to add information to this repository for more iOS Reverse Engineering assistance! 🌟
