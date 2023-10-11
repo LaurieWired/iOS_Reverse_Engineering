@@ -138,15 +138,19 @@ To determine if a binary is written in Swift, check the Mach-O sections and see 
 
 ![ghidra_swift_section](images/ghidra_swift_section.png)
 
-### Reversing Objective-C Code
-Objective-C uses dynamic method resolution for method invocations. Methods are specified by Selectors and then dynamically resolved at runtime via message passing. Decompilation in Ghidra displays the Objective-C runtime methods that perform this selction. For example, ```_objc_msgSend``` is part of the Objective-C runtime. References to all runtime methods can be found in the [Objective-C Runtime Reference](https://developer.apple.com/documentation/objectivec).
+### Reversing Objective-C Code - What to Watch Out For
+Objective-C uses dynamic method resolution for method invocations. Methods are specified by Selectors and then dynamically resolved at runtime via message passing. Decompilation in Ghidra displays the Objective-C runtime methods that perform this selection and invocation. For example, ```_objc_msgSend``` is part of the Objective-C runtime. References to all runtime methods and their descriptions can be found in the [Apple Objective-C Runtime Reference](https://developer.apple.com/documentation/objectivec).
 
-Insert ghidra screenshot
+The most important Objective-C runtime method to understand is ```_objc_msgSend```. The first argument to this function is the object (instance of the class) that contains the target method. The second argument is the selector that defines the specific method to be called. Finally, any remaining parameters are arguments that will be passed to the target function. Consider this snippet of decompiled Objective-C code from Ghidra: 
 
-For additional details on following Objective-C code in Ghidra, see [YouTube - Objective-C Calling Conventions](https://www.youtube.com/watch?v=eI-Btfjp-fg).
+```
+_objc_msgSend(uVar1,"encodeInteger:forKey:",uVar2,uVar3);
+```
 
-### Name Mangling
-Fixing swift mangled names
+In this example, ```uVar1``` refers to an instance of the selected class. ```encodeInteger:forKey:``` is the selector defining the method, and the remaining arguments, ```uVar2``` and ```uVar3```, will be passed to the method. For additional examples on following Objective-C code in Ghidra, see [YouTube - Objective-C Calling Conventions](https://www.youtube.com/watch?v=eI-Btfjp-fg).
+
+### Reversing Swift Code - What to Watch Out For
+Unlike Objective-C, Swift is statically linked rather than dynamically selecting and invoking methods. In order to insure uniqueness, the compiler mangles the name, types of parameters, and type of return value into the compiled Swift binary. This produces variables that are not human-readable. For example, the compiled Swift name ```_$s21ControlFlowFlattening0abC3AppV5$mainyyFZ``` actually translates to ```ControlFlowFlattening.ControlFlowFlatteningApp.$main()``` when demangled. Fortunately, Swift has built-in mechanisms for demangling names. Simply ensure Swift is installed and run the following commands to demangle single variables, classes, or methods:
 
 Mac:
 ```
@@ -158,11 +162,11 @@ Windows:
 swift-demangle _$s21ControlFlowFlattening11ContentViewVACycfC
 ```
 
-Running the script
+To automate this process, use the [Swift Demangler](https://github.com/LaurieWired/iOS_Reverse_Engingeering/blob/main/SwiftNameDemangler.py) Ghidra script provided in this repository. This will automatically traverse your Mach-O binary and rename each function or label to its demangled form. For assistance on running these scripts, see section [Running the Scripts](https://github.com/LaurieWired/iOS_Reverse_Engingeering#running-the-scripts).
 
-### Common Entrypoints for Swift and Objective C Code
+### Common Entrypoints for iOS Binaries
 
-The following contains a table of common methods to look at when starting to Reverse Engineer and iOS application. These are different entrypoints of code that may be executed for different states of the application.
+When you first open an iOS binary in Ghidra, it can be daunting determining where to begin your reverse engineering process. The [strings](https://github.com/LaurieWired/iOS_Reverse_Engingeering#finding-strings) are a great place to begin looking for potentially interesting or malicious code in iOS malware, but sometimes it is better to start from the top of the application. iOS apps follow a certain flow of events according to the [app lifecycle](https://developer.apple.com/documentation/uikit/app_and_environment/managing_your_app_s_life_cycle). The system is responsible for triggering different methods in the iOS app based on the different states. For example, the system automatically triggers ```application:didFinishLaunchingWithOptions:``` when a user taps on the app to open it. The following contains a table of common methods to look at when starting to Reverse Engineer and iOS application. These are different entrypoints of code that may be executed for different states of the application.
 
 | Class              | Method (Objective-C / Swift)  | Description |
 |--------------------|-------------------------------|-------------|
