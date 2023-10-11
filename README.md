@@ -16,7 +16,7 @@ Each IPA file is created to help you with your static analysis. Use the section 
 # Ghidra Scripts
 This repo contains scripts for helping your iOS Reverse Engineering including:
 - [Swift Name Demangler](https://github.com/LaurieWired/iOS_Reverse_engineering/blob/main/SwiftNameDemangler.py) - This traverses your Swift binary and demangles methods and labels. It sets each of the new names and leaves a comment with the original and demangled name above the method and label.
-  - NOTE: This requires that your machine has Swift installed. See [below](https://github.com/LaurieWired/iOS_Reverse_engineering/edit/main/README.md#installing-swift) for help on installing Swift.
+  - NOTE: This requires that your machine has Swift installed. See [below](https://github.com/LaurieWired/iOS_Reverse_Engineering/tree/main#installing-swift) for help on installing Swift.
 - [Swizzling Detector](https://github.com/LaurieWired/iOS_Reverse_engineering/blob/main/SwizzlingDetector.py) - This script searches your Objective-C binary to detect references to potential Swizzling calls. It prints the function name and all potential references in the code.
 
 ## Running the Scripts
