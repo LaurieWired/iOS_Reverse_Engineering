@@ -1,7 +1,7 @@
 # Repository Overview
 This repository is a reference for getting started with iOS Reverse Engineering! It contains all the information you need to start taking apart IPA files including:
-- Scripts for helping your iOS Reverse Engineering in Ghidra
 - Example iOS IPA files demonstrating different forms of obfuscation
+- Scripts for helping your iOS Reverse Engineering in Ghidra
 - A guide for getting started Reverse Engineering an IPA file
 
 I will continue to add information to this repository to further the field of iOS Reverse Engineering!
