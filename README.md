@@ -1,8 +1,26 @@
-# Repository Overview
+---
+
+
+<div align="center">
+
+![logo](images/logo.jpg)
+
+[![License: Apache 2.0](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/LaurieWired/iOS_Reverse_Engineering)](https://github.com/LaurieWired/iOS_Reverse_Engineering/releases)
+[![GitHub stars](https://img.shields.io/github/stars/LaurieWired/iOS_Reverse_Engineering)](https://github.com/LaurieWired/iOS_Reverse_Engineering/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/LaurieWired/iOS_Reverse_Engineering)](https://github.com/LaurieWired/iOS_Reverse_Engineering/network/members)
+[![GitHub contributors](https://img.shields.io/github/contributors/LaurieWired/iOS_Reverse_Engineering)](https://github.com/LaurieWired/iOS_Reverse_Engineering/graphs/contributors)
+[![Follow @lauriewired on Twitter](https://img.shields.io/twitter/follow/lauriewired?style=social)](https://twitter.com/lauriewired)
+
+</div>
+
+---
+
+# Description
 This repository is a reference for getting started with iOS Reverse Engineering! It contains all the information you need to start taking apart IPA files including:
-- Example iOS IPA files demonstrating different forms of obfuscation
-- Scripts for helping your iOS Reverse Engineering in Ghidra
-- A guide for getting started Reverse Engineering an IPA file
+- [Example IPA Files](https://github.com/LaurieWired/iOS_Reverse_Engineering/tree/main#example-ipa-files) - Example iOS IPA files demonstrating different forms of obfuscation
+- [Ghidra Scripts](https://github.com/LaurieWired/iOS_Reverse_Engineering/tree/main#ghidra-scripts) - Scripts for helping your iOS Reverse Engineering in Ghidra
+- [iOS RE Guide](https://github.com/LaurieWired/iOS_Reverse_Engineering/tree/main#getting-started-reversing-ios-ipa-files) - A guide for getting started Reverse Engineering an IPA file
 
 I will continue to add information to this repository to further the field of iOS Reverse Engineering!
 
