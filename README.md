@@ -102,11 +102,11 @@ print(json.dumps(pl, indent=4))
 ### Finding the Executable in the Info.plist
 Once, you have opened the plist text, the main executable will be found under the "CFBundleExecutable" tag.
 
-![ios_plist_exe](https://github.com/LaurieWired/iOS_Reverse_Engingeering/assets/123765654/174576ba-f371-45c3-965e-68cb045c4554)
+![ios_plist_exe](images/opened_plist.png)
 
 This string will name a Mach-O binary inside of the application bundle that will be the main entrypoint of the application.
 
-![macho_exe](https://github.com/LaurieWired/iOS_Reverse_Engingeering/assets/123765654/3033cc64-f318-4756-afe6-0aafe8268f02)
+![macho_exe](images/app_bundle_macho.png)
 
 After locating this Mach-O binary, you can import this file into Ghidra and begin your analysis of the code. Mach-O files can be FAT binaries, meaning that they may contain bundle support for more than one architecture. If this is the case, you can select the ```Batch``` option when importing the binary into Ghidra and select the architectures you would like to import. For an accompanying example of this process, see [YouTube - Finding the Entrypoint of iOS Apps in Ghidra](https://www.youtube.com/watch?v=mLDsIMXafP4).
 
@@ -136,7 +136,7 @@ Most newer iOS binaries will be written in Swift, but many legacy applications w
 
 To determine if a binary is written in Swift, check the Mach-O sections and see if there is a ```__swift5_``` section in the TEXT segment. This indicates the presence of Swift code. The Program Tree in Ghidra can be used to view the segments and sections of the binary.
 
-![ghidra_swift_section](https://github.com/LaurieWired/iOS_Reverse_Engingeering/assets/123765654/3e1b01ec-537a-4fd5-a38b-cff7fcd3c017)
+![ghidra_swift_section](images/ghidra_swift_section.png)
 
 ### Reversing Objective-C Code
 Objective-C uses dynamic method resolution for method invocations. Methods are specified by Selectors and then dynamically resolved at runtime via message passing. Decompilation in Ghidra displays the Objective-C runtime methods that perform this selction. For example, ```_objc_msgSend``` is part of the Objective-C runtime. References to all runtime methods can be found in the [Objective-C Runtime Reference](https://developer.apple.com/documentation/objectivec).
