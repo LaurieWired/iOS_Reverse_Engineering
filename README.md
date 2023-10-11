@@ -4,12 +4,12 @@ This repository is a reference for getting started with iOS Reverse Engineering!
 - Example iOS IPA files demonstrating different forms of obfuscation
 - A guide for getting started Reverse Engineering an IPA file
 
-I will continue to add information to this repository further iOS Reverse Engineering!
+I will continue to add information to this repository to further the field of iOS Reverse Engineering!
 
 # Example IPA Files
 Each IPA file is created to help you with your static analysis. Use the section below to learn how to extract the executable components and learn their inner workings.
 
-- [Swizzling IPA](https://github.com/LaurieWired/iOS_Reverse_engineering/blob/main/ObfuscatedAppExamples/ObjectiveSwizzling.ipa) - This file contains an example iOS application written in Objective-C that demostrates swizzling to replace one method's implementation with another.
+- [Swizzling IPA](https://github.com/LaurieWired/iOS_Reverse_engineering/blob/main/ObfuscatedAppExamples/ObjectiveSwizzling.ipa) - This file contains an example iOS application written in Objective-C that demonstrates swizzling to replace one method's implementation with another.
 - [No Tampering IPA](https://github.com/LaurieWired/iOS_Reverse_engineering/blob/main/ObfuscatedAppExamples/NoTampering.ipa) - This file contains an example iOS application written in Swift that uses the [IOSSecuritySuite](https://github.com/securing/IOSSecuritySuite) to avoid printing the true value to the screen if it discovers any potential tampering, debugging, or emulator use.
 - [Control Flow Flattening IPA](https://github.com/LaurieWired/iOS_Reverse_engineering/blob/main/ObfuscatedAppExamples/ControlFlowFlattening.ipa) - This file contains an example iOS application written in Swift that implements the same method without control flow flattening, with flattening, and with a more complex flattening example.
 
@@ -83,7 +83,7 @@ MyApp.ipa
        └── + Many more supporting files
 ```
 
-## Finding the Application Entrypoint in code
+## Finding the Application Entrypoint in Code
 In order to find the entrypoint of an application, check the Info.plist file. A plist (property list) file is a structured data representation used by iOS as well as other *OS systems such as Mac. It is often for storing user settings and information about bundles and applications. These can be in an XML or binary format. Reading an XML plist is as simple as throwing the file in a text editor, but reading a binary plist requires some decoding to convert to a human-readable format.
 
 ### Reading a Binary Property List
@@ -150,7 +150,7 @@ _objc_msgSend(uVar1,"encodeInteger:forKey:",uVar2,uVar3);
 In this example, ```uVar1``` refers to an instance of the selected class. ```encodeInteger:forKey:``` is the selector defining the method, and the remaining arguments, ```uVar2``` and ```uVar3```, will be passed to the method. For additional examples on following Objective-C code in Ghidra, see [YouTube - Objective-C Calling Conventions](https://www.youtube.com/watch?v=eI-Btfjp-fg).
 
 ### Reversing Swift Code - What to Watch Out For
-Unlike Objective-C, Swift is statically linked rather than dynamically selecting and invoking methods. In order to insure uniqueness, the compiler mangles the name, types of parameters, and type of return value into the compiled Swift binary. This produces variables that are not human-readable. For example, the compiled Swift name ```_$s21ControlFlowFlattening0abC3AppV5$mainyyFZ``` actually translates to ```ControlFlowFlattening.ControlFlowFlatteningApp.$main()``` when demangled. Fortunately, Swift has built-in mechanisms for demangling names. Simply ensure Swift is installed and run the following commands to demangle single variables, classes, or methods:
+Unlike Objective-C, Swift is statically linked rather than dynamically selecting and invoking methods. In order to ensure uniqueness, the compiler mangles the name, types of parameters, and type of return value into the compiled Swift binary. This produces variables that are not human-readable. For example, the compiled Swift name ```_$s21ControlFlowFlattening0abC3AppV5$mainyyFZ``` actually translates to ```ControlFlowFlattening.ControlFlowFlatteningApp.$main()``` when demangled. Fortunately, Swift has built-in mechanisms for demangling names. Simply ensure Swift is installed and run the following commands to demangle single variables, classes, or methods:
 
 Mac:
 ```
@@ -168,6 +168,7 @@ To automate this process, use the [Swift Demangler](https://github.com/LaurieWir
 
 When you first open an iOS binary in Ghidra, it can be daunting determining where to begin your reverse engineering process. The [strings](https://github.com/LaurieWired/iOS_Reverse_engineering#finding-strings) are a great place to begin looking for potentially interesting or malicious code in iOS malware, but sometimes it is better to start from the top of the application. iOS apps follow a certain flow of events according to the [app lifecycle](https://developer.apple.com/documentation/uikit/app_and_environment/managing_your_app_s_life_cycle). The system is responsible for triggering different methods in the iOS app based on the different states. For example, the system automatically triggers ```application:didFinishLaunchingWithOptions:``` when a user taps on the app to open it. The following contains a table of common methods to look at when starting to Reverse Engineer and iOS application. These are different entrypoints of code that may be executed for different states of the application.
 
+
 | Class              | Method (Objective-C / Swift)  | Description |
 |--------------------|-------------------------------|-------------|
 | `UIApplicationDelegate` | `application:didFinishLaunchingWithOptions:` / `application(_:didFinishLaunchingWithOptions:)` | Called when the application has finished launching, but before it has started running. Often used for set-up code that doesn't involve the UI. |
@@ -176,5 +177,4 @@ When you first open an iOS binary in Ghidra, it can be daunting determining wher
 | `SceneDelegate` | `sceneDidBecomeActive:` / `sceneDidBecomeActive(_:)` | Called when the scene becomes active (the app is in the foreground and receiving events). |
 | `UIViewController` | `viewDidLoad` / `viewDidLoad()` | Called after the controller's view is loaded into memory. Ideal for initial setup. |
 | `UIViewController` | `viewWillAppear:` / `viewWillAppear(_:)` | Called before the view is added to the app's view hierarchy. |
-
 
