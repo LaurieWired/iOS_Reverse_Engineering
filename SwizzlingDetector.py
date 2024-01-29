@@ -4,6 +4,7 @@
 
 from ghidra.program.model.symbol import SymbolType
 
+
 def find_swizzling():
     # List of potential swizzling related methods
     swizzling_methods = [

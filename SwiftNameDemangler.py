@@ -6,10 +6,12 @@
 # Requires Swift to be installed on the machine
 # Takes some time to run for larger applications
 
+import subprocess
+
 from ghidra.program.model.listing import Function
 from ghidra.program.model.symbol import SymbolType
 from java.lang import System
-import subprocess
+
 
 def demangle_swift_name(mangled_name):
     os_name = System.getProperty("os.name").lower()
